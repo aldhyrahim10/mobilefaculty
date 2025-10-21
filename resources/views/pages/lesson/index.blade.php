@@ -123,6 +123,12 @@
                                 <input type="file" name="image" id="image" class="form-control">
                             </div>
                         </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="">Hastag</label>
+                                <select name="tags[]" id="tags" class="form-control" multiple="multiple"></select>
+                            </div>
+                        </div>
 
                     </div>
 
@@ -179,6 +185,13 @@
                                 <small class="mt-2">Gambar sebelumnya</small>
                                 <br>
                                 <img id="img-now" src="" alt="" style="width: 150px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="">Hastag</label>
+                                <select name="edit_tags[]" id="edit_tags" class="form-control"
+                                    multiple="multiple"></select>
                             </div>
                         </div>
 
@@ -241,6 +254,22 @@
 
 <script>
     $(document).ready(function () {
+
+        //Inisialisasi Select2 dengan kemampuan membuat tag baru
+        $('#tags').select2({
+            tags: true,
+            tokenSeparators: [','],
+            placeholder: 'Ketik tag, lalu tekan Enter',
+            width: '100%'
+        });
+
+        $('#edit_tags').select2({
+            tags: true,
+            tokenSeparators: [','],
+            placeholder: 'Ubah tag atau tambahkan baru',
+            dropdownParent: $('#modalUpdate'),
+            width: '100%'
+        });
         $("#formAddLesson").submit(function (e) {
             e.preventDefault();
 
@@ -249,6 +278,11 @@
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
             var type = $("#post_category_id").val();
+
+            let tagsArray = $('#tags').val() || [];
+            let tagsString = tagsArray.join(',');
+            formData.append('tags', tagsString);
+
 
             formData.append('_token', csrfToken);
             formData.append('post_category_id', type);
@@ -304,6 +338,22 @@
                     editorDescription.setData(data.content);
                     let imageUrl = '/storage/' + data.image;
                     formEditContent.find("#img-now").attr('src', imageUrl);
+
+                    // --- handle tags ---
+                    var tagsString = data.tags || '';
+                    const tagsArray = tagsString.split(',').map(tag => tag.trim()).filter(
+                        tag => tag !== '');
+
+                    // tambahkan jika tag belum ada di select2
+                    tagsArray.forEach(tag => {
+                        if ($('#edit_tags').find("option[value='" + tag + "']")
+                            .length === 0) {
+                            var newOption = new Option(tag, tag, true, true);
+                            $('#edit_tags').append(newOption);
+                        }
+                    });
+
+                    $('#edit_tags').val(tagsArray).trigger('change');
                 }
             });
         });
@@ -316,6 +366,10 @@
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
             var type = $("#post_category_id").val();
+
+            let tagsArray = $('#edit_tags').val() || [];
+            let tagsString = tagsArray.join(',');
+            formData.append('tags', tagsString);
 
             formData.append('_token', csrfToken);
             formData.append('_method', 'PATCH');

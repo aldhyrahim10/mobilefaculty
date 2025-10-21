@@ -63,4 +63,10 @@ class FrontController extends Controller
         $post = Post::where('slug', $slug)->first();
         return view('pages.front.post.detail', compact('post'));
     }
+
+    public function tags(string $tag){
+        $posts = Post::where('tags', 'like', '%' . $tag . '%')->get();
+
+        return view('pages.front.post.tag', compact('posts', 'tag'));
+    }
 }

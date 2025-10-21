@@ -15,6 +15,7 @@ Route::post('/logout', [AuthController::class, 'logoutAction'])->name('logout-ac
 Route::get('/instructor', [FrontController::class, 'instructor'])->name('instructor-front');
 Route::get('/documentation', [FrontController::class, 'documentation'])->name('documentation-front');
 Route::get('/lesson', [FrontController::class, 'lesson'])->name('lesson-front');
+Route::get('/tags/{tag}', [FrontController::class, 'tags'])->name('tags-front');
 
 
 
