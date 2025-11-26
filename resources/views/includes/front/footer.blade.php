@@ -48,6 +48,7 @@
         <div class="border-t border-gray-400 my-10"></div>
 
         <!-- Partner -->
+         <p class="text-center text-lg mb-4">Partners By</p>
         <div class="flex flex-wrap justify-center items-center gap-6">
             <img src="{{ asset('img/partners/1.jpeg') }}" class="h-12 object-contain" alt="">
             <img src="{{ asset('img/partners/2.jpg') }}" class="h-12 object-contain" alt="">
@@ -58,7 +59,15 @@
             <img src="{{ asset('img/partners/7.png') }}" class="h-12 object-contain" alt="">
             <img src="{{ asset('img/partners/8.png') }}" class="h-12 object-contain" alt="">
             <img src="{{ asset('img/partners/9.png') }}" class="h-12 object-contain" alt="">
+            <img src="{{ asset('img/partners/10.png') }}" class="h-12 object-contain" alt="">
         </div>
+
+        <div class="flex flex-wrap justify-center items-center gap-6 mt-5">
+            <img src="{{ asset('img/img_footer_1.png') }}" class="h-24 object-contain" alt="">
+            <img src="{{ asset('img/img_footer_2.png') }}" class="h-24 object-contain" alt="">
+        </div>
+
+        <p class="text-center">European IT Certification Institute Brussels, Belgium, European Union</p>
 
         <!-- Copyright -->
         <p class="text-center text-gray-200 text-sm mt-8">

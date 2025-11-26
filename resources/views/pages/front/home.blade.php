@@ -76,6 +76,33 @@ Selamat Datang di Mobile Faculty
     </div>
 </section>
 
+<section class="py-32" id="about-me">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <!-- Judul -->
+        <div class="mb-12 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 relative inline-block">
+                Introduction European IT Certification Institute Brussels, Belgium, European Union
+            </h2>
+            <div class="h-1 w-20 bg-blue-600 mx-auto mt-8 mb-6 rounded-full"></div>
+
+            <!-- Video YouTube -->
+            <div class="flex justify-center mt-10">
+                <iframe 
+                    class="w-full max-w-3xl aspect-video rounded-xl shadow-lg"
+                    src="https://www.youtube.com/embed/UObcNgrbNV8?si=tNgbbV9ZbMXkj0MU?autoplay=1&mute=0"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
 <!-- Instruktur -->
 <section class="py-32 bg-gray-100">
     <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
