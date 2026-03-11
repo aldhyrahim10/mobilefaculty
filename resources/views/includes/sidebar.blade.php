@@ -42,6 +42,12 @@
                     <span class="menu-title" data-i18n="Email">Media Belajar</span>
                 </a>
             </li>
+            <li class=" nav-item">
+                <a href="{{route('academic')}}">
+                    <i class="feather icon-file"></i>
+                    <span class="menu-title" data-i18n="Email">Akademik</span>
+                </a>
+            </li>
 
         </ul>
     </div>

@@ -5,14 +5,14 @@
     <div class="content-header-left col-md-9 col-12 mb-2">
         <div class="row breadcrumbs-top">
             <div class="col-12">
-                <h2 class="content-header-title float-left mb-0">Dokumentasi</h2>
+                <h2 class="content-header-title float-left mb-0">Akademik</h2>
                 <div class="breadcrumb-wrapper col-12">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Home</a>
                         </li>
-                        <li class="breadcrumb-item">Dokumentasi
+                        <li class="breadcrumb-item">Akademik
                         </li>
-                        <li class="breadcrumb-item active">Data Dokumentasi
+                        <li class="breadcrumb-item active">Data Akademik
                         </li>
                     </ol>
                 </div>
@@ -29,7 +29,7 @@
             </div>
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Data-data Dokumentasi</h4>
+                    <h4 class="card-title">Data-data Akademik</h4>
                 </div>
                 <div class="card-content">
                     <div class="card-body card-dashboard">
@@ -40,18 +40,20 @@
                                     <tr>
                                         <th>No.</th>
                                         <th>Judul</th>
-                                        <th>Foto Kegiatan</th>
+                                        <th>Instruktur</th>
+                                        <th>Gambar Utama</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($documentations as $item)
+                                    @foreach ($academics as $item)
                                         <tr class="item-content">
                                             <td style="width: 2%">
                                                 {{ $loop->iteration }}
-                                                <input type="hidden" class="hdnPostID" value="{{ $item->id }}">
+                                                <input type="hidden" class="hdnAcademicID" value="{{ $item->id }}">
                                             </td>
-                                            <td style="width: 40%">{{ $item->title }}</td>
+                                            <td >{{ $item->title }}</td>
+                                            <td>{{ $item->instructor->name }}</td>
                                             <td style="width: 30%">
                                                 <img src="{{ asset('storage/' . $item->image) }}"
                                                     width="150px" alt="">
@@ -98,10 +100,9 @@
 
                 </div>
             </div>
-            <form id="formAddDocumentation">
+            <form id="formAddAcademic">
                 <div class="modal-body" style="max-height: calc(100vh - 200px); overflow-y: auto;">
                     <div class="row">
-                        <input type="hidden" id="post_category_id" value="1">
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="">Judul</label>
@@ -112,14 +113,81 @@
 
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="">Konten</label>
-                                <textarea class="form-control content-desc-add" name="content" id="content" cols="30"
+                                <label for="">Deskripsi</label>
+                                <textarea class="form-control description-add" name="description" id="description" cols="30"
                                     rows="5" placeholder="Masukkan Konten"></textarea>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="">Foto Kegiatan</label>
+                                <label for="">Harga</label>
+                                <input type="number" class="form-control" id="price" name="price"
+                                    placeholder="Masukkan Harga">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Kategori Akademik</label>
+                                <select name="academic_category_id" id="academic_category_id" class="form-control">
+                                    <option value="">--Pilih Kategori--</option>
+                                    @foreach ($categories as $item)
+                                        <option value="{{ $item->id }}">{{ $item->academic_category_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Instruktur Akademik</label>
+                                <select name="instructor_id" id="instructor_id" class="form-control">
+                                    <option value="">--Pilih Instruktur--</option>
+                                    @foreach ($instructors as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Level</label>
+                                <select name="level" id="level" class="form-control">
+                                    <option value="">--Pilih Level--</option>
+                                    <option value="1">Beginner</option>
+                                    <option value="2">Intermediate</option>
+                                    <option value="3">Expert</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Metode Pembelajaran</label>
+                                <select name="method" id="method" class="form-control">
+                                    <option value="">--Pilih Metode Pembelajaran--</option>
+                                    <option value="1">Online</option>
+                                    <option value="2">Offline</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Durasi (Hari)</label>
+                                <input type="number" class="form-control" id="duration" name="duration"
+                                    placeholder="Masukkan Durasi Waktu">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Jenis Sertifikasi</label>
+                                <select name="certificate_type" id="certificate_type" class="form-control">
+                                    <option value="">--Pilih Jenis Sertifikasi--</option>
+                                    <option value="1">Sertifikat BNSP</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="">Gambar Utama</label>
                                 <input type="file" name="image" id="image" class="form-control">
                             </div>
                         </div>
@@ -158,11 +226,10 @@
 
                 </div>
             </div>
-            <form id="formUpdateDocumentation">
+            <form id="formUpdateAcademic">
                 <div class="modal-body" style="max-height: calc(100vh - 200px); overflow-y: auto;">
-                    <input type="hidden" id="hdnPostID" value="">
                     <div class="row">
-                        <input type="hidden" id="post_category_id" value="1">
+                        <input type="hidden" id="hdnAcademicID" value="">
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="">Judul</label>
@@ -173,14 +240,81 @@
 
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="">Konten</label>
-                                <textarea class="form-control content-desc-edit" name="content" id="content" cols="30"
+                                <label for="">Deskripsi</label>
+                                <textarea class="form-control description-edit" name="description" id="description" cols="30"
                                     rows="5" placeholder="Masukkan Konten"></textarea>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="">Foto Kegiatan</label>
+                                <label for="">Harga</label>
+                                <input type="number" class="form-control" id="price" name="price"
+                                    placeholder="Masukkan Harga">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Kategori Akademik</label>
+                                <select name="academic_category_id" id="academic_category_id" class="form-control">
+                                    <option value="">--Pilih Kategori--</option>
+                                    @foreach ($categories as $item)
+                                        <option value="{{ $item->id }}">{{ $item->academic_category_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Instruktur Akademik</label>
+                                <select name="instructor_id" id="instructor_id" class="form-control">
+                                    <option value="">--Pilih Instruktur--</option>
+                                    @foreach ($instructors as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Level</label>
+                                <select name="level" id="level" class="form-control">
+                                    <option value="">--Pilih Level--</option>
+                                    <option value="1">Beginner</option>
+                                    <option value="2">Intermediate</option>
+                                    <option value="3">Expert</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Metode Pembelajaran</label>
+                                <select name="method" id="method" class="form-control">
+                                    <option value="">--Pilih Metode Pembelajaran--</option>
+                                    <option value="1">Online</option>
+                                    <option value="2">Offline</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Durasi (Hari)</label>
+                                <input type="number" class="form-control" id="duration" name="duration"
+                                    placeholder="Masukkan Durasi Waktu">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Jenis Sertifikasi</label>
+                                <select name="certificate_type" id="certificate_type" class="form-control">
+                                    <option value="">--Pilih Jenis Sertifikasi--</option>
+                                    <option value="1">Sertifikat BNSP</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="">Gambar Utama</label>
                                 <input type="file" name="image" id="image" class="form-control">
                                 <small class="mt-2">Gambar sebelumnya</small>
                                 <br>
@@ -190,8 +324,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="">Hastag</label>
-                                <select name="edit_tags[]" id="edit_tags" class="form-control"
-                                    multiple="multiple"></select>
+                                <select name="edit_tags[]" id="edit_tags" class="form-control" multiple="multiple"></select>
                             </div>
                         </div>
 
@@ -202,7 +335,6 @@
                     <button type="submit" class="btn btn-primary">Simpan</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                 </div>
-
             </form>
         </div>
     </div>
@@ -214,7 +346,7 @@
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
-            <input type="hidden" class="hdnPostID" value="">
+            <input type="hidden" class="hdnAcademicID" value="">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel1">Hapus Data</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -241,11 +373,11 @@
     let editorDescription;
 
     ClassicEditor
-        .create(document.querySelector('.content-desc-add'))
+        .create(document.querySelector('.description-add'))
         .catch(error => console.error(error));
 
     ClassicEditor
-        .create(document.querySelector('.content-desc-edit'))
+        .create(document.querySelector('.description-edit'))
         .then(editor => {
             editorDescription = editor;
         }).catch(error => console.error(error));
@@ -254,6 +386,7 @@
 
 <script>
     $(document).ready(function () {
+
         //Inisialisasi Select2 dengan kemampuan membuat tag baru
         $('#tags').select2({
             tags: true,
@@ -269,33 +402,29 @@
             dropdownParent: $('#modalUpdate'),
             width: '100%'
         });
-
-
-        $("#formAddDocumentation").submit(function (e) {
+        $("#formAddAcademic").submit(function (e) {
             e.preventDefault();
 
             let formData = new FormData(this);
 
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
-
-            var type = $("#post_category_id").val();
-
+            
             let tagsArray = $('#tags').val() || [];
             let tagsString = tagsArray.join(',');
             formData.append('tags', tagsString);
 
 
-            // formData.append('_token', csrfToken);
-            formData.append('post_category_id', type);
+            formData.append('_token', csrfToken);
 
             $.ajax({
-                url: "{{ route('add-documentation-api') }}",
+                url: "{{ route('add-academic') }}",
                 type: "POST",
                 data: formData,
                 processData: false,
                 contentType: false,
                 success: function (response) {
                     alert("Data berhasil ditambahkan");
+                    location.reload();
                 },
                 error: function (xhr, status, error) {
                     $(".alert-section").empty();
@@ -323,19 +452,26 @@
 
         $(document).on('click', '.btn-update', function () {
             var item = $(this).closest('.item-content');
-            var id = item.find(".hdnPostID").val();
+            var id = item.find(".hdnAcademicID").val();
 
             $.ajax({
-                url: "{{ route('get-one-documentation') }}",
+                url: "{{ route('get-one-academic') }}",
                 type: "GET",
                 data: {
                     'query': id
                 },
                 success: function (data) {
-                    var formEditContent = $("#formUpdateDocumentation");
-                    formEditContent.find("#hdnPostID").val(data.id);
+                    var formEditContent = $("#formUpdateAcademic");
+                    formEditContent.find("#hdnAcademicID").val(data.id);
                     formEditContent.find("#title").val(data.title);
-                    editorDescription.setData(data.content);
+                    editorDescription.setData(data.description);
+                    formEditContent.find("#price").val(data.price);
+                    formEditContent.find("#academic_category_id").val(data.academic_category_id);
+                    formEditContent.find("#instructor_id").val(data.instructor_id);
+                    formEditContent.find("#level").val(data.level);
+                    formEditContent.find("#method").val(data.method);
+                    formEditContent.find("#duration").val(data.duration);
+                    formEditContent.find("#certificate_type").val(data.certificate_type);
                     let imageUrl = '/storage/' + data.image;
                     formEditContent.find("#img-now").attr('src', imageUrl);
 
@@ -354,35 +490,30 @@
                     });
 
                     $('#edit_tags').val(tagsArray).trigger('change');
-
-
                 }
             });
         });
 
-        $("#formUpdateDocumentation").submit(function (e) {
+        $("#formUpdateAcademic").submit(function (e) {
             e.preventDefault();
 
             let formData = new FormData(this);
 
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
-            var type = $("#post_category_id").val();
+           
 
             let tagsArray = $('#edit_tags').val() || [];
             let tagsString = tagsArray.join(',');
             formData.append('tags', tagsString);
 
-
             formData.append('_token', csrfToken);
             formData.append('_method', 'PATCH');
-            formData.append('post_category_id', type);
-            
-
-            var id = $(this).find("#hdnPostID").val();
+           
+            var id = $(this).find("#hdnAcademicID").val();
 
             $.ajax({
-                url: "{{ route('update-documentation', ':id') }}"
+                url: "{{ route('update-academic', ':id') }}"
                     .replace(':id', id),
                 type: "POST",
                 data: formData,
@@ -419,20 +550,20 @@
         });
         $(document).on('click', '.btn-delete', function () {
             var item = $(this).closest('.item-content');
-            var id = item.find(".hdnPostID").val();
+            var id = item.find(".hdnAcademicID").val();
 
             var modalContent = $("#modalDelete");
 
-            modalContent.find(".hdnPostID").val(id);
+            modalContent.find(".hdnAcademicID").val(id);
         });
 
         $(document).on('click', '.btn-delete-execute', function () {
             var modalContent = $("#modalDelete");
-            var id = modalContent.find(".hdnPostID").val();
+            var id = modalContent.find(".hdnAcademicID").val();
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
             $.ajax({
-                url: "{{ route('delete-documentation', ':id') }}"
+                url: "{{ route('delete-academic', ':id') }}"
                     .replace(':id', id),
                 type: "POST",
                 data: {
@@ -448,5 +579,4 @@
     });
 
 </script>
-
 @endsection

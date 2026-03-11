@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Instructor;
+use App\Models\Academic;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
@@ -18,6 +19,24 @@ class FrontController extends Controller
     public function instructor(){
         $instructors = Instructor::all();
         return view('pages.front.instructor.index', compact('instructors'));
+    }
+
+    public function academic(Request $request){
+        $query = Academic::with(['academicCategory', 'instructor']);
+
+        if ($request->has('search')) {
+            $query->where('title', 'like', '%' . $request->search . '%');
+        }
+
+        $academics = $query->paginate(8);
+
+        // LOGIKA INI PENTING:
+        if ($request->ajax()) {
+            return view('partials.academic-list', compact('academics'))->render();
+        }
+
+        return view('pages.front.academic.index', compact('academics'));
+
     }
 
     public function documentation(Request $request){

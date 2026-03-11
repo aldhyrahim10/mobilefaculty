@@ -5,6 +5,45 @@
 @endsection
 
 @section('content')
+
+<style>
+.desc-content h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 1.5rem 0 1rem;
+}
+
+.desc-content h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 1.25rem 0 0.75rem;
+}
+
+.desc-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 1rem 0 0.5rem;
+}
+
+.desc-content p {
+    margin: 0.75rem 0;
+    line-height: 1.7;
+}
+
+.desc-content ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin: 0.75rem 0;
+}
+
+.desc-content ol {
+    list-style: decimal;
+    padding-left: 1.5rem;
+    margin: 0.75rem 0;
+}
+</style>
+
+
 <div class="content-page mt-24">
     <div class="container mx-auto">
         <div class="content-detail w-11/12 mx-auto">

@@ -9,9 +9,13 @@
                 </h3>
                 <p class="text-sm text-gray-500 mt-1">Dokumentasi</p>
                 <p class="text-sm text-gray-600 mt-1">Penulis: Admin Mobile Faculty</p>
-                <p class="text-sm text-gray-700 mt-3">
-                    {{ \Illuminate\Support\Str::words(strip_tags($item->content), 25, '...') }}
-                </p>
+                <div class="text-sm text-gray-700 mt-3">
+                    {{ \Illuminate\Support\Str::words(
+                        trim(preg_replace('/\s+/', ' ', strip_tags(html_entity_decode($item->content)))),
+                        20,
+                        '...'
+                    ) }}
+                </div>
                 <a href="{{ route('detail-front', $item->slug) }}"
                     class="mt-4 inline-block text-blue-700 font-medium hover:text-blue-900 transition">
                     Lihat Detail →

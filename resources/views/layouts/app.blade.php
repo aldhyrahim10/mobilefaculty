@@ -8,6 +8,8 @@
     <link rel="icon" type="image/png" href="{{asset('img/logo_association.png')}}">
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+
 
     <style>
         html {
@@ -70,8 +72,10 @@
                 }
             });
         });
+        
 
     </script>
+    
 
     @yield('scripts')
 
