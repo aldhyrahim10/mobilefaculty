@@ -165,9 +165,9 @@
 
                     <div class="mb-8">
                         <h3 class="text-xl font-bold text-gray-800 mb-3">{{ $item->title }}</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed">
+                        <div class="desc-content text-gray-600 text-sm leading-relaxed">
                             {!! $item->description !!}
-                        </p>
+                        </div>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
@@ -182,7 +182,10 @@
                                 </svg>
                             </div>
                             <span class="text-[10px] uppercase font-bold text-gray-400 tracking-widest">Durasi</span>
-                            <span class="text-sm font-extrabold text-gray-800">{{ $item->duration }} Hari</span>
+                            <span class="text-sm font-extrabold text-gray-800">{{ $item->duration }} Hari ({{ $item->method == "1" ? 'Online' : 'Offline' }})
+
+
+                            </span>
                         </div>
 
                         <div class="bg-[#F0FFF8] p-4 rounded-2xl flex flex-col items-center justify-center text-center">

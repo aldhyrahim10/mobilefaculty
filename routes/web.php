@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\InstructorController;
 use App\Http\Controllers\Admin\DocumentationController;
 use App\Http\Controllers\Admin\LessonController;
 use App\Http\Controllers\Admin\AcademicController;
+use App\Http\Controllers\Admin\AcademicCategoryController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\AuthController;
 
@@ -29,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/documentations', [DocumentationController::class, 'index'])->name('documentation');
     Route::get('/admin/lessons', [LessonController::class, 'index'])->name('lesson');
     Route::get('/admin/academic', [AcademicController::class, 'index'])->name('academic');
+    Route::get('/admin/academic-category', [AcademicCategoryController::class, 'index'])->name('academic-category');
 });
 
 
@@ -52,5 +54,10 @@ Route::post('/data/add-academic', [AcademicController::class, 'store'])->name('a
 Route::get('/data/get-one-academic', [AcademicController::class, 'getOneData'])->name('get-one-academic');
 Route::patch('/data/update-academic/{id}', [AcademicController::class, 'update'])->name('update-academic');
 Route::delete('/data/delete-academic/{id}', [AcademicController::class, 'destroy'])->name('delete-academic');
+
+Route::post('/data/add-academic-category', [AcademicCategoryController::class, 'store'])->name('add-academic-category');
+Route::get('/data/get-one-academic-category', [AcademicCategoryController::class, 'getOneData'])->name('get-one-academic-category');
+Route::patch('/data/update-academic-category/{id}', [AcademicCategoryController::class, 'update'])->name('update-academic-category');
+Route::delete('/data/delete-academic-category/{id}', [AcademicCategoryController::class, 'destroy'])->name('delete-academic-category');
 
 Route::get('/{slug}', [FrontController::class, 'detail'])->name('detail-front');
